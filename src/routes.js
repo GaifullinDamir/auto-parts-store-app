@@ -31,7 +31,8 @@ export const publicRoutes = [
         Component: Auth
     },
     {
-        path: PART_ROUTE + ':id',
+        path: PART_ROUTE + '/:id',
         Component: PartPage
     }
+
 ];
