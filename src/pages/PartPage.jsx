@@ -8,16 +8,16 @@ import bigStar from '../assets/star.png'
 const PartPage = () => {
     const part = {id: 1, name: 'Michelin Pilot Sport', price: 25000, rating: 5, img:'https://cdn.kolesa-darom.ru/upload/iblock/e0f/e0f1bfe6ade48ab0abb81adaff2e1088.jpg'};
     const description = [
-        {id:1, title: 'lorem ipsum', description: '5 м'},
-        {id:2, title: 'lorem ipsum', description: '5 м'},
-        {id:3, title: 'lorem ipsum', description: '5 м'},
-        {id:4, title: 'lorem ipsum', description: '5 м'},
-        {id:5, title: 'lorem ipsum', description: '5 м'}
+        {id:1, title: 'Страна производитель', description: 'Германия'},
+        {id:2, title: 'Размерность', description: '275/25'},
+        {id:3, title: 'Сезонность', description: 'лето'},
+        {id:4, title: 'Срок службы', description: '5 лет'},
+        {id:5, title: 'Гарантия', description: '1 год'}
     ]
 
 
     return (
-        <Container className='mt-5 ms-2'>
+        <Container className='mw-100 mt-5 ms-2'>
             <Row>
                 <Col className='d-flex justify-content-center' md={4}>
                     <Image width={300} height={300} src={part.img}/>
@@ -43,10 +43,11 @@ const PartPage = () => {
                     </Card>
                 </Col>
             </Row>
-            <Row className='d-flex flex-column m-5'>
-                {description.map(info => {
+            <Row className='d-flex flex-column m-3'>
+                <h3>Характеристики:</h3>
+                {description.map((info, index) => {
                     return(
-                        <Row key={info.id}>
+                        <Row key={info.id} style={{background: index % 2 === 0 ? '#aaaaaa' : 'transparent', padding: 10 }}>
                             {info.title}: {info.description}
                         </Row>
                     )
