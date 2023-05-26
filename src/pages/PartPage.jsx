@@ -1,26 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
-import stars from '../assets/stars.png';
-import star from '../assets/ant-design_star-outlined.png';
-import rating from '../assets/rating.png';
-import bigStar from '../assets/star.png'
+import { useParams } from 'react-router-dom';
+import bigStar from '../assets/star.png';
 
 const PartPage = () => {
-    const part = {id: 1, name: 'Michelin Pilot Sport', price: 25000, rating: 5, img:'https://cdn.kolesa-darom.ru/upload/iblock/e0f/e0f1bfe6ade48ab0abb81adaff2e1088.jpg'};
-    const description = [
-        {id:1, title: 'Страна производитель', description: 'Германия'},
-        {id:2, title: 'Размерность', description: '275/25'},
-        {id:3, title: 'Сезонность', description: 'лето'},
-        {id:4, title: 'Срок службы', description: '5 лет'},
-        {id:5, title: 'Гарантия', description: '1 год'}
-    ]
-
+    const [part, setPart] = useState({info: []});
+    //Получаем параметры из строки запроса
+    const params = useParams();
+    useEffect(() => {
+        fetchOnePart(id).then(data => setPart(data));
+    }, []);
 
     return (
         <Container className='mw-100 mt-5 ms-2'>
             <Row>
                 <Col className='d-flex justify-content-center' md={4}>
-                    <Image width={300} height={300} src={part.img}/>
+                    <Image width={300} height={300} src={process.env.REACT_APP_API_URL + part.img}/>
                 </Col>
                 <Col md={4}>
                     <Row className='d-flex flex-column align-items-center'>
@@ -45,7 +40,7 @@ const PartPage = () => {
             </Row>
             <Row className='d-flex flex-column m-3'>
                 <h3>Характеристики:</h3>
-                {description.map((info, index) => {
+                {part.info.map((info, index) => {
                     return(
                         <Row key={info.id} style={{background: index % 2 === 0 ? '#aaaaaa' : 'transparent', padding: 10 }}>
                             {info.title}: {info.description}

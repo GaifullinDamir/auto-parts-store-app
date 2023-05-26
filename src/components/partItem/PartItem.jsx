@@ -11,7 +11,7 @@ const PartItem = ({part}) => {
     return (
         <Col className='mt-5 d-flex justify-content-center' md={3} onClick={() => navigate(PART_ROUTE + '/:' + part.id)}>
             <Card style={{width: 150, cursor:'pointer'}} border={'light'}>
-                <Image width={150} height={150} src={part.img}/>
+                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + part.img}/>
                 <div className='mt-2 d-flex justify-content-between align-tems-center'>
                     <div style={{color:'#aaaaaa'}}>Michelin...</div>
                     <div className='d-flex align-items-center'>
