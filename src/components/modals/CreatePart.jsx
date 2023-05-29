@@ -2,8 +2,9 @@ import React, { useContext, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Button, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 import { Context } from '../..';
+import { observer } from 'mobx-react-lite';
 
-const CreatePart = ({show, onHide}) => {
+const CreatePart = observer(({show, onHide}) => {
     const {part} = useContext(Context);
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
@@ -13,15 +14,23 @@ const CreatePart = ({show, onHide}) => {
     const addInfo = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}]);
         console.log(info);
-    }
+    };
 
     const removeInfo= (number) => {
         setInfo(info.filter(i => i.number !== number));
-    }
+    };
+
+    const changeInfo = (key, value, number) => {
+        setInfo(info.map(i => i.number === number ? {...i, [key]: value} : i))
+    };
 
     const selectFile = (e) => {
         setFile(e.target.files[0]);
-    }
+    };
+
+    const addPart = () => {
+
+    };
 
     return (
         <Modal
@@ -96,11 +105,15 @@ const CreatePart = ({show, onHide}) => {
                             <Row className='mt-3' key={i.number}>
                                 <Col md={4}>
                                     <Form.Control 
+                                        value={i.title}
+                                        onChange={() => changeInfo('title', e.traget.value, i.number)}
                                         placeholder='Название характеристики'
                                     />
                                 </Col>
                                 <Col md={4}>
                                     <Form.Control 
+                                        value={i.description}
+                                        onChange={() => changeInfo('description', e.traget.value, i.number)}
                                         placeholder='Описание свойства свойства'
                                     />
                                 </Col>
@@ -118,10 +131,10 @@ const CreatePart = ({show, onHide}) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant={'outline-dark'} onClick={onHide}>Закрыть</Button>
-                <Button variant={'outline-dark'} onClick={onHide}>Добавить</Button>
+                <Button variant={'outline-dark'} onClick={addPart}>Добавить</Button>
             </Modal.Footer>
         </Modal>
     );
-};
+});
 
 export default CreatePart;
