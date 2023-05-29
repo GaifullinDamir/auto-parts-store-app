@@ -5,6 +5,9 @@ import { Context } from '../..';
 
 const CreatePart = ({show, onHide}) => {
     const {part} = useContext(Context);
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState(0);
+    const [file, setFile] = useState(null); 
     const [info, setInfo] = useState([]);
 
     const addInfo = () => {
@@ -14,6 +17,10 @@ const CreatePart = ({show, onHide}) => {
 
     const removeInfo= (number) => {
         setInfo(info.filter(i => i.number !== number));
+    }
+
+    const selectFile = (e) => {
+        setFile(e.target.files[0]);
     }
 
     return (
@@ -31,34 +38,49 @@ const CreatePart = ({show, onHide}) => {
             <Modal.Body>
                 <Container className='d-flex justify-content-start'>
                     <Dropdown className='mt-3 me-3'>
-                        <Dropdown.Toggle variant='outline-dark'>Выберите тип</Dropdown.Toggle>
-                        <Dropdown.Menu>
+                        <Dropdown.Toggle variant='outline-dark'>{part.selectedType.name || 'Выберите тип'}</Dropdown.Toggle>
+                        <Dropdown.Menu> 
                             {part.types.map(type => {
                                 return(
-                                    <Dropdown.Item key={type.id}>{type.name}</Dropdown.Item>
+                                    <Dropdown.Item 
+                                        onClick={() => part.setSelectedType(type)} 
+                                        key={type.id}
+                                    >
+                                        {type.name}
+                                    </Dropdown.Item>
                                 )
                             })}
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown className='mt-3 mb-3'>
-                        <Dropdown.Toggle variant='outline-dark' >Выберите брэнд</Dropdown.Toggle>
+                        <Dropdown.Toggle variant='outline-dark' >{part.selectedBrand.name || 'Выберите бренд'}</Dropdown.Toggle>
                         <Dropdown.Menu>
                             {part.brands.map(brand => {
                                 return(
-                                    <Dropdown.Item key={brand.id}>{brand.name}</Dropdown.Item>
+                                    <Dropdown.Item 
+                                        onClick={() => part.setSelectedBrand(brand)} 
+                                        key={brand.id}
+                                    >
+                                        {brand.name}
+                                    </Dropdown.Item>
                                 )
                             })}
                         </Dropdown.Menu>
                     </Dropdown>
                 </Container>
                 <Form.Control
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className='mt-3'
                     placeholder='Введите название запчасти'/>
                 <Form.Control
+                    value={price}
+                    onChange={(e) => setPrice(Number(e.target.value))}
                     className='mt-3'
                     placeholder='Введите стоимость'
                     type='number'/>
                 <Form.Control
+                    onChange={selectFile}
                     className='mt-3 mb-3'
                     type='file'/>
                 <hr/>
