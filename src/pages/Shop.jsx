@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect } from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
 import BrandBar from '../components/brandBar/BrandBar';
+import Pages from '../components/Pages';
 import PartList from '../components/partList/PartList';
 import TypeBar from '../components/typeBar/TypeBar';
 import { fetchBrands, fetchParts, fetchTypes } from '../http/partAPI';
@@ -12,8 +13,18 @@ const Shop = observer(() => {
     useEffect(() => {
         fetchTypes().then(data => part.setTypes(data));
         fetchBrands().then(data => part.setBrands(data));
-        fetchParts().then(data => part.setParts(data.rows));
+        fetchParts(null, null, 1, 3).then(data => {
+            part.setParts(data.rows);
+            part.setTotalCount(data.count);
+        });
     }, []);
+
+    useEffect(() => {
+        fetchParts(part.selectedType.id, part.selectedBrand.id, part.page, part.limit).then(data => {
+            part.setParts(data.rows);
+            part.setTotalCount(data.count, part.selectedType, part.selectedBrand);
+        });
+    }, [device.page, ])
 
     return (
         <Container>
@@ -24,6 +35,7 @@ const Shop = observer(() => {
                 <Col md={9}>
                     <BrandBar/>
                     <PartList/>
+                    <Pages/>
                 </Col>
             </Row>
         </Container>

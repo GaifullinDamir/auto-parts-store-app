@@ -27,8 +27,10 @@ export const fetchBrands = async () => {
     return data;
 }
 
-export const fetchParts = async () => {
-    const {data} = await $host.get('api/part');
+export const fetchParts = async (typeId, brandId, page, limit = 5) => {
+    const {data} = await $host.get('api/part', {params:{
+        typeId, brandId, page, limit
+    }});
     return data;
 }
 
