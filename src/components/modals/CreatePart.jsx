@@ -29,9 +29,9 @@ const CreatePart = observer(({show, onHide}) => {
         setFile(e.target.files[0]);
     };
 
-    const addPart = () => {
+    const addPart = async() => {
 
-        const imgUrl = uploadFile(file);
+        const imgUrl = await uploadFile(file);
 
         const formData = new FormData();
         formData.append('name', name);

@@ -48,5 +48,5 @@ export const uploadFile = async (file) => {
     const formData = new FormData();
     formData.append('imgUrl', file);
     const { data } = await $authHost.post('/upload', formData);
-    return data;
+    return await JSON.parse(data);
 }
