@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Button, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 import { Context } from '../..';
 import { observer } from 'mobx-react-lite';
-import { createPart } from '../../http/partAPI';
+import { createPart, uploadFile } from '../../http/partAPI';
 
 const CreatePart = observer(({show, onHide}) => {
     const {part} = useContext(Context);
@@ -30,10 +30,13 @@ const CreatePart = observer(({show, onHide}) => {
     };
 
     const addPart = () => {
-        const formData = new FormData()
+
+        const img = uploadFile(file);
+
+        const formData = new FormData();
         formData.append('name', name);
         formData.append('price', `${price}`);
-        formData.append('img', file);
+        formData.append('img', img);
         formData.append('brandId', part.selectedBrand.id);
         formData.append('typeId', part.selectedType.id);
         formData.append('info', JSON.stringify(info));

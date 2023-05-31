@@ -16,7 +16,6 @@ export const createPart = async (part) => {
     return data;
 }
 
-
 export const fetchTypes = async () => {
     const {data} = await $host.get('api/type');
     return data;
@@ -43,4 +42,11 @@ export const check = async () => {
     const {data} = await $authHost.post('api/user/auth');
     localStorage.setItem('token', data.token);    
     return jwt_decode(data.token);
+}
+
+export const uploadFile = async (file) => {
+    const formData = new FormData();
+    formData.append('img', file);
+    const { data } = await $authHost.post('/upload', formData);
+    return data;
 }
