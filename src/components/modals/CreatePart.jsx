@@ -117,14 +117,14 @@ const CreatePart = observer(({show, onHide}) => {
                                 <Col md={4}>
                                     <Form.Control 
                                         value={i.title}
-                                        onChange={() => changeInfo('title', e.traget.value, i.number)}
+                                        onChange={(e) => changeInfo('title', e.traget.value, i.number)}
                                         placeholder='Название характеристики'
                                     />
                                 </Col>
                                 <Col md={4}>
                                     <Form.Control 
                                         value={i.description}
-                                        onChange={() => changeInfo('description', e.traget.value, i.number)}
+                                        onChange={(e) => changeInfo('description', e.traget.value, i.number)}
                                         placeholder='Описание свойства свойства'
                                     />
                                 </Col>

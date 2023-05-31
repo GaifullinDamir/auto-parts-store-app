@@ -1,6 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext, useEffect } from 'react';
 import {Container, Row, Col} from 'react-bootstrap';
+import { Context } from '..';
 import BrandBar from '../components/brandBar/BrandBar';
 import Pages from '../components/Pages';
 import PartList from '../components/partList/PartList';
@@ -24,7 +25,7 @@ const Shop = observer(() => {
             part.setParts(data.rows);
             part.setTotalCount(data.count, part.selectedType, part.selectedBrand);
         });
-    }, [device.page, ])
+    }, [part.page, ])
 
     return (
         <Container>

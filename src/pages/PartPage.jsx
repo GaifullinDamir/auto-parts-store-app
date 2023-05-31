@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import { fetchOnePart } from '../http/partAPI';
 import bigStar from '../assets/star.png';
 
 const PartPage = () => {
     const [part, setPart] = useState({info: []});
     //Получаем параметры из строки запроса
-    const params = useParams();
+    const {id} = useParams();
     useEffect(() => {
         fetchOnePart(id).then(data => setPart(data));
     }, []);

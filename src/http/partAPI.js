@@ -7,12 +7,12 @@ export const createType = async (type) => {
 }
 
 export const createBrand = async (brand) => {
-    const {data} = await $authHost.post('api/brand', type);
+    const {data} = await $authHost.post('api/brand', brand);
     return data;
 }
 
 export const createPart = async (part) => {
-    const {data} = await $authHost.post('api/part', type);
+    const {data} = await $authHost.post('api/part', part);
     return data;
 }
 
@@ -38,11 +38,11 @@ export const fetchOnePart = async (id) => {
     return data;
 }
 
-export const check = async () => {
-    const {data} = await $authHost.post('api/user/auth');
-    localStorage.setItem('token', data.token);    
-    return jwt_decode(data.token);
-}
+// export const check = async () => {
+//     const {data} = await $authHost.post('api/user/auth');
+//     localStorage.setItem('token', data.token);    
+//     return jwt_decode(data.token);
+// }
 
 export const uploadFile = async (file) => {
     const formData = new FormData();
