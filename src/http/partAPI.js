@@ -46,7 +46,7 @@ export const check = async () => {
 
 export const uploadFile = async (file) => {
     const formData = new FormData();
-    formData.append('img', file);
+    formData.append('imgUrl', file);
     const { data } = await $authHost.post('/upload', formData);
     return data;
 }

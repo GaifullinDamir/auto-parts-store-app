@@ -31,12 +31,12 @@ const CreatePart = observer(({show, onHide}) => {
 
     const addPart = () => {
 
-        const img = uploadFile(file);
+        const imgUrl = uploadFile(file);
 
         const formData = new FormData();
         formData.append('name', name);
         formData.append('price', `${price}`);
-        formData.append('img', img);
+        formData.append('imgUrl', imgUrl);
         formData.append('brandId', part.selectedBrand.id);
         formData.append('typeId', part.selectedType.id);
         formData.append('info', JSON.stringify(info));
