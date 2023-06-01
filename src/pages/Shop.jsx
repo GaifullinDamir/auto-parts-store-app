@@ -25,7 +25,7 @@ const Shop = observer(() => {
     useEffect(() => {
         fetchParts(part.selectedType._id, part.selectedBrand._id, part.page, part.limit).then(data => {
             part.setParts(data);
-            part.setTotalCount(data.count, part.selectedType, part.selectedBrand);
+            part.setTotalCount(data.length);
         });
     }, [part.page, part.selectedType._id, part.selectedBrand._id])
 

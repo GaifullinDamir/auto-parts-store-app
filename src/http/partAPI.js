@@ -39,12 +39,6 @@ export const fetchOnePart = async (id) => {
     return data;
 }
 
-// export const check = async () => {
-//     const {data} = await $authHost.post('api/user/auth');
-//     localStorage.setItem('token', data.token);    
-//     return jwt_decode(data.token);
-// }
-
 export const uploadFile = async (imageFormData) => {
     const { data } = await $authHost.post('api/upload', imageFormData);
     return await data.url;
