@@ -6,11 +6,13 @@ import bigStar from '../assets/star.png';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { createBasketPart } from '../http/basketAPI';
+import MessageModal from '../components/modals/MessageModal';
 
 const PartPage = observer(() => {
     const {basket, user} = useContext(Context);
     const [part, setPart] = useState({});
     const [partInfo, setPartInfo] = useState([]);
+    const [isMessageVisible, setIsMessageVisible] = useState(false);
     //Получаем параметры из строки запроса
     const {id} = useParams();
     useEffect(() => {
@@ -35,12 +37,12 @@ const PartPage = observer(() => {
                 basketId: basket.id,
                 partId: id
             };
-
-            // console.log(basketPart);
     
-            await createBasketPart(basketPart).then(data => {
+            const result = await createBasketPart(basketPart).then(data => {
                 basket.setBasketParts([...basket.basketParts, data]);
+                setIsMessageVisible(true);
             });
+
         } catch(error) {
             console.log(error);
         }
@@ -92,6 +94,7 @@ const PartPage = observer(() => {
                 :
                     null}
             </Row>
+            <MessageModal show={isMessageVisible} onHide={() => setIsMessageVisible(false)} message={'Товар в корзине. Можете оплачивать!'}/>
         </Container>
     );
 });
