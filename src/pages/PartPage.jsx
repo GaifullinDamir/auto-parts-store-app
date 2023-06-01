@@ -1,22 +1,29 @@
 import React, {useEffect, useState} from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import { fetchOnePart } from '../http/partAPI';
+import { fetchOnePart, fetchOnePartInfo } from '../http/partAPI';
 import bigStar from '../assets/star.png';
 
 const PartPage = () => {
-    const [part, setPart] = useState({info: []});
+    const [part, setPart] = useState({});
+    const [partInfo, setPartInfo] = useState([]);
     //Получаем параметры из строки запроса
     const {id} = useParams();
     useEffect(() => {
-        fetchOnePart(id).then(data => setPart(data));
+        fetchOnePart(id).then(data => {
+            setPart(data);
+        });
+        fetchOnePartInfo(id).then(data => {
+            setPartInfo(data);
+            console.log(data);
+        }) 
     }, []);
 
     return (
         <Container className='mw-100 mt-5 ms-2'>
             <Row>
                 <Col className='d-flex justify-content-center' md={4}>
-                    <Image width={300} height={300} src={process.env.REACT_APP_API_URL + part.img}/>
+                    <Image width={300} height={300} src={process.env.REACT_APP_API_URL + part.imgUrl}/>
                 </Col>
                 <Col md={4}>
                     <Row className='d-flex flex-column align-items-center'>
@@ -41,13 +48,16 @@ const PartPage = () => {
             </Row>
             <Row className='d-flex flex-column m-3'>
                 <h3>Характеристики:</h3>
-                {part.info.map((info, index) => {
-                    return(
-                        <Row key={info.id} style={{background: index % 2 === 0 ? '#aaaaaa' : 'transparent', padding: 10 }}>
-                            {info.title}: {info.description}
-                        </Row>
-                    )
-                })}
+                {partInfo?
+                    partInfo.map((info, index) => {
+                        return(
+                            <Row key={info._id} style={{background: index % 2 === 0 ? '#aaaaaa' : 'transparent', padding: 10 }}>
+                                {info.title}: {info.description}
+                            </Row>
+                        )
+                    })
+                :
+                    null}
             </Row>
         </Container>
     );
