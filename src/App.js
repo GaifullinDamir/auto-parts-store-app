@@ -11,7 +11,7 @@ import StoreNavbar from "./components/StoreNavbar";
 
 
 const App = observer(() => {
-  const {user, basket} = useContext(Context);
+  const {user, basket, part} = useContext(Context);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
