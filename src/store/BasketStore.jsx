@@ -2,17 +2,17 @@ import {makeAutoObservable} from 'mobx';
 
 export default class BasketStore {
     constructor() {
-        this._basket = null;
+        this._id = {};
         this._basketParts = [];
         makeAutoObservable(this);
     }
 
-    setBasket(basket) {
-        this._basket = basket;
+    setId(id) {
+        this._id = id;
     }
 
-    get basket() {
-        return this._basket;
+    get id() {
+        return this._id;
 
     }
 

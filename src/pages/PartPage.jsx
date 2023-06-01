@@ -1,10 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { fetchOnePart, fetchOnePartInfo } from '../http/partAPI';
 import bigStar from '../assets/star.png';
+import { observer } from 'mobx-react-lite';
+import { Context } from '..';
+import { createBasketPart } from '../http/basketAPI';
 
-const PartPage = () => {
+const PartPage = observer(() => {
+    const {basket, user} = useContext(Context);
     const [part, setPart] = useState({});
     const [partInfo, setPartInfo] = useState([]);
     //Получаем параметры из строки запроса
@@ -18,6 +22,29 @@ const PartPage = () => {
             console.log(data);
         }) 
     }, []);
+
+    const onBasketClick = async () => {
+        try{
+            console.log(basket);
+            console.log(user);
+            const basketPart = {
+                fullname: '',
+                phoneNumber: '',
+                address: '',
+                orderIsPaid: false,
+                basketId: basket.id,
+                partId: id
+            };
+
+            // console.log(basketPart);
+    
+            await createBasketPart(basketPart).then(data => {
+                basket.setBasketParts([...basket.basketParts, data]);
+            });
+        } catch(error) {
+            console.log(error);
+        }
+    };
 
     return (
         <Container className='mw-100 mt-5 ms-2'>
@@ -42,7 +69,13 @@ const PartPage = () => {
                         style={{width:300, height:300, fontSize:32, border:'5px solid #aaaaaa'}}
                     >
                         <h3 className='text-center'>От {part.price} руб.</h3>
-                        <Button variant='outline-dark' style={{width:'65%'}}>В корзину</Button>
+                        <Button 
+                            variant='outline-dark' 
+                            style={{width:'65%'}}
+                            onClick={onBasketClick}
+                        >
+                            В корзину
+                        </Button>
                     </Card>
                 </Col>
             </Row>
@@ -61,6 +94,6 @@ const PartPage = () => {
             </Row>
         </Container>
     );
-};
+});
 
 export default PartPage;

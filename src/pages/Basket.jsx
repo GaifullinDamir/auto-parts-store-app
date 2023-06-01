@@ -1,5 +1,5 @@
 import { Row, Col, Card, Image, Button, Container } from 'react-bootstrap';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import bmw from '../assets/bmw.jpg';
@@ -8,6 +8,10 @@ import CreateBasketPart from '../components/modals/CreateBasketPart';
 const Basket = observer(() => {
     const {basket, part, user} = useContext(Context);
     const [isCreateBasketPartVisible, setIsCreateBasketPartVisible] = useState(false);
+
+    useEffect(() => {
+        
+    }, [basket.basketParts]);
 
     return (
         <Row className='d-flex'>

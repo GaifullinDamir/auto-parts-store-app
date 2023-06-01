@@ -3,7 +3,7 @@ import React, {useContext, useState} from 'react';
 import { Container, Form, Card, Button, Row } from 'react-bootstrap';
 import {NavLink, useLocation, useNavigate} from 'react-router-dom';
 import { Context } from '..';
-import { createBasket } from '../http/basketAPI';
+import { createBasket, fetchBasket } from '../http/basketAPI';
 import { checkAdminRole, login, registration } from '../http/userAPI';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
 
@@ -21,6 +21,8 @@ const Auth = observer (() => {
             let data;
             if(isLogin) {
                 data = await login(email, password);
+                
+                user.setId(data._id);
             } else {
                 data = await registration(email, password);
                 console.log('basket');
@@ -28,13 +30,18 @@ const Auth = observer (() => {
                         await createBasket().then(basketData => {
                             basket.setBasket(basketData);
                         });
+                        // console.log(basket);
                     }
             }
             user.setUser(user);
             user.setIsAuth(true);
             user.setIsAdmin(checkAdminRole());
+            await fetchBasket(user.id).then(bsk => {
+                console.log(bsk);
+                basket.setId(bsk._id);
+            });
 
-            console.log(user);
+            // console.log(user);
             navigate(SHOP_ROUTE);
         }catch(e){
             alert(e);
