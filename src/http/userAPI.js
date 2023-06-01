@@ -25,7 +25,7 @@ export const checkAdminRole = () => {
     if (token) {
         role = jwt_decode(token).role;
     }
-    console.log(role);
+    // console.log(role);
     return  role === 'admin';
 }
 

@@ -19,6 +19,7 @@ const StoreNavbar = observer(() => {
         console.log('Выход');
         user.setUser({});
         user.setIsAuth(false);
+        localStorage.clear();
     }
 
     return (

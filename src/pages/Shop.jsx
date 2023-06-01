@@ -17,8 +17,8 @@ const Shop = observer(() => {
         fetchParts(null, null, 1, 3).then(data => {
             part.setParts(data);
             part.setTotalCount(data.length);
-            console.log(data);
-            console.log(part);
+            // console.log(data);
+            // console.log(part);
         });
     }, []);
 

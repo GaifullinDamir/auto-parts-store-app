@@ -3,12 +3,13 @@ import React, {useContext, useState} from 'react';
 import { Container, Form, Card, Button, Row } from 'react-bootstrap';
 import {NavLink, useLocation, useNavigate} from 'react-router-dom';
 import { Context } from '..';
+import { createBasket } from '../http/basketAPI';
 import { checkAdminRole, login, registration } from '../http/userAPI';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
 
 
 const Auth = observer (() => {
-    const {user} = useContext(Context);
+    const {user, basket} = useContext(Context);
     const location = useLocation();
     const navigate = useNavigate();
     const isLogin = location.pathname === LOGIN_ROUTE;
@@ -20,10 +21,14 @@ const Auth = observer (() => {
             let data;
             if(isLogin) {
                 data = await login(email, password);
-                // console.log(data);
             } else {
                 data = await registration(email, password);
-                // console.log(data);
+                console.log('basket');
+                    if(!basket.basket) {
+                        await createBasket().then(basketData => {
+                            basket.setBasket(basketData);
+                        });
+                    }
             }
             user.setUser(user);
             user.setIsAuth(true);
