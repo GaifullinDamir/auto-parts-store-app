@@ -41,6 +41,7 @@ const Auth = observer (() => {
                 await fetchBasket(user.id).then(bsk => {
                     console.log(bsk);
                     basket.setId(bsk._id);
+                    // localStorage.setItem('basketId', data.token);
                 });
             }
             

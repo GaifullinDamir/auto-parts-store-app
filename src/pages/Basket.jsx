@@ -29,14 +29,15 @@ const Basket = observer(() => {
     // }, [basket.basketParts]);
 
     return (
-        <Row className='d-flex'>
-            <Col className='mt-5 d-flex justify-content-center' md={3} >
-                {parts.map(part => {
+        <Row className='d-flex mb-5'>
+            {/* <Col className='mt-5 d-flex justify-content-center' md={3} >
+                
+            </Col> */}
+            {parts.map(part => {
                     return(
-                        <BasketItem key={part._id} part={part} setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
+                        <BasketItem key={part._id} part={part.part} setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
                     )
                 })}
-            </Col>
             <CreateBasketPart show={isCreateBasketPartVisible} onHide={() => setIsCreateBasketPartVisible(false)}/>
         </Row>
     );
