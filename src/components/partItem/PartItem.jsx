@@ -11,15 +11,13 @@ const PartItem = ({part}) => {
     return (
         <Col className='mt-5 d-flex justify-content-center' md={3} onClick={() => navigate(PART_ROUTE + '/' + part._id)}>
             <Card style={{width: 150, cursor:'pointer'}} border={'light'}>
-                <Image width={150} height={150} src={process.env.REACT_APP_API_URL + part.imgUrl}/>
+                <Image style={{ 'objectFit': 'contain'}} width={200} height={200} src={process.env.REACT_APP_API_URL + part.imgUrl}/>
                 <div className='mt-2 d-flex justify-content-between align-tems-center'>
                     <div style={{color:'#aaaaaa'}}>Michelin...</div>
-                    <div className='d-flex align-items-center'>
-                        <div className='mx-1'>{part.rating}</div>
-                        <Image width={17} height={17} src={star}/>
-                    </div>
+                    
                 </div>
                 <div>{part.name}</div>
+                <div><span style={{fontWeight: '600'}}>{part.price} руб.</span></div>
             </Card>
         </Col>
     );

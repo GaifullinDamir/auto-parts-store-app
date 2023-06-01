@@ -15,7 +15,7 @@ const Pages = observer(() => {
 
     // console.log(pageCount);
     return (
-        <Pagination>
+        <Pagination className='m-auto'>
             {pages.map((page) => {
                 return(
                     <Pagination.Item

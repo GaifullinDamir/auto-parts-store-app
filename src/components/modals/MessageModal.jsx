@@ -8,7 +8,6 @@ const MessageModal = ({show, onHide, message}) => {
     return (
         <Modal
             show={show}
-            onHide={onHide}
             size="md"
             centered
         >

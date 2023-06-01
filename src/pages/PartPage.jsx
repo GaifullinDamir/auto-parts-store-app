@@ -52,7 +52,7 @@ const PartPage = observer(() => {
         <Container className='mw-100 mt-5 ms-2'>
             <Row>
                 <Col className='d-flex justify-content-center' md={4}>
-                    <Image width={300} height={300} src={process.env.REACT_APP_API_URL + part.imgUrl}/>
+                    <Image style={{margin: '0 auto', 'objectFit': 'contain'}} width={300} height={350} src={process.env.REACT_APP_API_URL + part.imgUrl}/>
                 </Col>
                 <Col md={4}>
                     <Row className='d-flex flex-column align-items-center'>

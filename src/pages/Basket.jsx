@@ -10,7 +10,7 @@ const Basket = observer(() => {
     const [isCreateBasketPartVisible, setIsCreateBasketPartVisible] = useState(false);
 
     useEffect(() => {
-        
+
     }, [basket.basketParts]);
 
     return (
@@ -19,7 +19,7 @@ const Basket = observer(() => {
                 <Card 
                     className='d-flex flex-column align-items-center'
                     style={{width: 250, cursor:'pointer'}} border={'light'}>
-                    <Image style={{margin: '0 auto', 'object-fit': 'contain'}} width={250} height={300} src={bmw}/>
+                    <Image style={{margin: '0 auto', 'objectFit': 'contain'}} width={250} height={300} src={bmw}/>
                     <div className='mt-2 d-flex justify-content-between align-tems-center'>
                         <div style={{color:'#aaaaaa'}}>Фара левая для BMW 3 F30 2011-2018 63117419633</div>
                     </div>

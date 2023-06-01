@@ -30,12 +30,12 @@ const Shop = observer(() => {
     }, [part.page, part.selectedType._id, part.selectedBrand._id])
 
     return (
-        <Container>
-            <Row className='mt-3'>
+        <Container style={{minHeight:'100vh'}}>
+            <Row className='mt-3 h-100'>
                 <Col md={3}>
                     <TypeBar/>
                 </Col>
-                <Col md={9}>
+                <Col md={9} className='d-flex flex-column'>
                     <BrandBar/>
                     <PartList/>
                     <Pages/>

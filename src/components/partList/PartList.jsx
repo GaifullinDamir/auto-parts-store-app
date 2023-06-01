@@ -8,7 +8,7 @@ const PartList = observer(() => {
     const {part} = useContext(Context);
     // console.dir(part.parts);
     return (
-        <Row className='d-flex'>
+        <Row className='d-flex mb-5' >
            {part.parts? part.parts.map(part => {
             return(
                 <PartItem key={part._id} part={part}/>
