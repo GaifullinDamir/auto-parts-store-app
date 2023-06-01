@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { BrowserRouter } from "react-router-dom";
 import { Context } from ".";
-import { check } from "./http/userAPI";
+import { check, checkAdminRole } from "./http/userAPI";
 import AppRouter from "./components/AppRouter";
 import StoreNavbar from "./components/StoreNavbar";
 
@@ -18,8 +18,8 @@ const App = observer(() => {
         if(data){
           user.setUser(true);
           user.setIsAuth(true);
+          user.setIsAdmin(checkAdminRole());
         }
-        
       })
       .finally(() => {
         setLoading(false);

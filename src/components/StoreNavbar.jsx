@@ -16,6 +16,7 @@ const StoreNavbar = observer(() => {
     const navigate = useNavigate();
 
     const logOut = () => {
+        console.log('Выход');
         user.setUser({});
         user.setIsAuth(false);
     }
@@ -35,7 +36,7 @@ const StoreNavbar = observer(() => {
                     <Button 
                         variant='outline-light' 
                         className = 'ms-3' 
-                        onClick={() => logOut}
+                        onClick={() => logOut()}
                     >
                         Выйти
                     </Button>

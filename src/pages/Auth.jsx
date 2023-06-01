@@ -3,7 +3,7 @@ import React, {useContext, useState} from 'react';
 import { Container, Form, Card, Button, Row } from 'react-bootstrap';
 import {NavLink, useLocation, useNavigate} from 'react-router-dom';
 import { Context } from '..';
-import { login, registration } from '../http/userAPI';
+import { checkAdminRole, login, registration } from '../http/userAPI';
 import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
 
 
@@ -27,6 +27,9 @@ const Auth = observer (() => {
             }
             user.setUser(user);
             user.setIsAuth(true);
+            user.setIsAdmin(checkAdminRole());
+
+            console.log(user);
             navigate(SHOP_ROUTE);
         }catch(e){
             alert(e);
