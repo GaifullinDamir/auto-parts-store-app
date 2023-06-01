@@ -13,7 +13,7 @@ const BrandBar = observer(() => {
                     <Card
                         style={{cursor:'pointer'}}
                         onClick={() => part.setSelectedBrand(brand)}
-                        border={brand.id === part.selectedBrand.id ? 'primary' : 'light'}
+                        border={brand._id === part.selectedBrand._id ? 'primary' : 'light'}
                         key={brand._id}
                         className='mx-1 pd-3 w-auto'
                     >
