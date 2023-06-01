@@ -15,9 +15,10 @@ const Shop = observer(() => {
         fetchTypes().then(data => part.setTypes(data));
         fetchBrands().then(data => part.setBrands(data));
         fetchParts(null, null, 1, 3).then(data => {
-            part.setParts(data.rows);
-            part.setTotalCount(data.count);
-            // console.log(data);
+            part.setParts(data);
+            part.setTotalCount(data.length);
+            console.log(data);
+            console.log(part);
         });
     }, []);
 

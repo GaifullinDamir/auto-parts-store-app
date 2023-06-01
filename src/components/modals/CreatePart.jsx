@@ -53,6 +53,7 @@ const CreatePart = observer(({show, onHide}) => {
         };
         console.log(data);
         createPart(data).then((data) => {
+            console.log(data);
             alert('Запчать добавлена успешно.')
             onHide();
         });
