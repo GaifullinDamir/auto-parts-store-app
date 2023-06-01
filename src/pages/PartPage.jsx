@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { createBasketPart } from '../http/basketAPI';
 import MessageModal from '../components/modals/MessageModal';
+import { checkAdminRole } from '../http/userAPI';
 
 const PartPage = observer(() => {
     const {basket, user} = useContext(Context);
@@ -71,13 +72,19 @@ const PartPage = observer(() => {
                         style={{width:300, height:300, fontSize:32, border:'5px solid #aaaaaa'}}
                     >
                         <h3 className='text-center'>От {part.price} руб.</h3>
-                        <Button 
-                            variant='outline-dark' 
-                            style={{width:'65%'}}
-                            onClick={onBasketClick}
-                        >
-                            В корзину
-                        </Button>
+                        {
+                            !checkAdminRole()?
+                                <Button 
+                                variant='outline-dark' 
+                                style={{width:'65%'}}
+                                onClick={onBasketClick}
+                                >
+                                    В корзину
+                                </Button>
+                            :
+                                null
+                        }
+                        
                     </Card>
                 </Col>
             </Row>

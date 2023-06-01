@@ -12,14 +12,16 @@ import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASKET_ROUTE } from '../utils/con
 import {observer} from 'mobx-react-lite';
 
 const StoreNavbar = observer(() => {
-    const {user} = useContext(Context);
+    const {user, basket} = useContext(Context);
     const navigate = useNavigate();
 
     const logOut = () => {
         console.log('Выход');
         user.setUser({});
         user.setIsAuth(false);
+        basket.setId(null);
         localStorage.clear();
+        navigate(SHOP_ROUTE);
     }
 
     return (

@@ -24,7 +24,6 @@ const CreateBrand = observer(({show, onHide}) => {
             })
     };
 
-
     return (
         <Modal
             show={show}

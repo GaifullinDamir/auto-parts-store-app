@@ -18,7 +18,7 @@ const MessageModal = ({show, onHide, message}) => {
             </Modal.Header>
             <Modal.Body>
                 <div>
-                    <p style={{'text-align': 'center', 'font-weight': '400', 'text-size': '25px'}}>{message}</p>
+                    <p style={{textAlign: 'center', fontWeight: '400', textSize: '25px'}}>{message}</p>
                 </div>
             </Modal.Body>
             <Modal.Footer>
