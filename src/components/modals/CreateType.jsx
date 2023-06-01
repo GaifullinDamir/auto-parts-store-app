@@ -40,7 +40,7 @@ const CreateType = observer(({show, onHide}) => {
                 <Form.Control 
                     value={value}
                     onChange={e => setValue(e.target.value)}
-                    placeHolder={'Название типа'}></Form.Control>
+                    placeholder={'Название типа'}></Form.Control>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant={'outline-dark'} onClick={onHide}>Закрыть</Button>

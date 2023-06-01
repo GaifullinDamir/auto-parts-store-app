@@ -27,12 +27,17 @@ const StoreNavbar = observer(() => {
             <NavLink to={SHOP_ROUTE} style={{color:'#ffffff', textDecoration:'none'}}>Bayerisch</NavLink>
             {user.isAuth ?
                 <Nav className="ml-auto">
-                    <Button 
-                        variant='outline-light' 
-                        onClick={() => navigate(ADMIN_ROUTE)}
-                        >
-                            Админ панель
-                    </Button>
+                    {user.isAdmin ?
+                        <Button 
+                            variant='outline-light' 
+                            onClick={() => navigate(ADMIN_ROUTE)}
+                            >
+                                Админ панель
+                        </Button>
+                    :
+                        null
+                    }
+                    
                     <Button 
                         variant='outline-light' 
                         className = 'ms-3' 

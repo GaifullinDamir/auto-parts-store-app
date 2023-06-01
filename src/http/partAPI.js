@@ -13,6 +13,7 @@ export const createBrand = async (brand) => {
 
 export const createPart = async (part) => {
     const {data} = await $authHost.post('api/part', part);
+    
     return data;
 }
 
@@ -44,9 +45,7 @@ export const fetchOnePart = async (id) => {
 //     return jwt_decode(data.token);
 // }
 
-export const uploadFile = async (file) => {
-    const formData = new FormData();
-    formData.append('imgUrl', file);
-    const { data } = await $authHost.post('/upload', formData);
-    return await JSON.parse(data);
+export const uploadFile = async (imageFormData) => {
+    const { data } = await $authHost.post('api/upload', imageFormData);
+    return await data.url;
 }

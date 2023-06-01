@@ -31,16 +31,31 @@ const CreatePart = observer(({show, onHide}) => {
 
     const addPart = async() => {
 
-        const imgUrl = await uploadFile(file);
+        const imageFormData= new FormData();
+        imageFormData.append('image', file);
+        const imgUrl = await uploadFile(imageFormData);
 
         const formData = new FormData();
         formData.append('name', name);
         formData.append('price', `${price}`);
         formData.append('imgUrl', imgUrl);
-        formData.append('brandId', part.selectedBrand.id);
-        formData.append('typeId', part.selectedType.id);
+        formData.append('brandId', part.selectedBrand._id);
+        formData.append('typeId', part.selectedType._id);
         formData.append('info', JSON.stringify(info));
-        createPart(formData).then((data) => onHide);
+
+        const data = {
+            name,
+            price,
+            imgUrl,
+            brandId: part.selectedBrand._id,
+            typeId: part.selectedType._id,
+            info : JSON.stringify(info)
+        };
+        console.log(data);
+        createPart(data).then((data) => {
+            alert('Запчать добавлена успешно.')
+            onHide();
+        });
     };
 
     return (
@@ -64,7 +79,7 @@ const CreatePart = observer(({show, onHide}) => {
                                 return(
                                     <Dropdown.Item 
                                         onClick={() => part.setSelectedType(type)} 
-                                        key={type.id}
+                                        key={type._id}
                                     >
                                         {type.name}
                                     </Dropdown.Item>
@@ -79,7 +94,7 @@ const CreatePart = observer(({show, onHide}) => {
                                 return(
                                     <Dropdown.Item 
                                         onClick={() => part.setSelectedBrand(brand)} 
-                                        key={brand.id}
+                                        key={brand._id}
                                     >
                                         {brand.name}
                                     </Dropdown.Item>
