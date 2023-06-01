@@ -1,11 +1,13 @@
 import { Row, Col, Card, Image, Button, Container } from 'react-bootstrap';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import bmw from '../assets/bmw.jpg';
+import CreateBasketPart from '../components/modals/CreateBasketPart';
 
 const Basket = observer(() => {
     const {basket, part, user} = useContext(Context);
+    const [isCreateBasketPartVisible, setIsCreateBasketPartVisible] = useState(false);
 
     return (
         <Row className='d-flex'>
@@ -23,6 +25,7 @@ const Basket = observer(() => {
                         className='mt-1'
                         variant='outline-dark' 
                         style ={{width:'50%'}}
+                        onClick={() => setIsCreateBasketPartVisible(true)}
                         >
                             Оплатить
                     </Button>
@@ -35,6 +38,7 @@ const Basket = observer(() => {
                     </Button>
                 </Card>
             </Col>
+            <CreateBasketPart show={isCreateBasketPartVisible} onHide={() => setIsCreateBasketPartVisible(false)}/>
         </Row>
     );
 });

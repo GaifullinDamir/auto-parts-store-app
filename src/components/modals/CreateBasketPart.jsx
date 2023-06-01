@@ -17,12 +17,12 @@ const CreateBasketPart = observer(({show, onHide}) => {
     useEffect(() => {
     }, []);
 
-    const addType = () => {
-        createType({name: value})
-            .then(data => {
-                setValue('');
-                onHide();
-            })
+    const addBasketPart = () => {
+        // createType({name: value})
+        //     .then(data => {
+        //         setValue('');
+        //         onHide();
+        //     })
     };
 
     return (
@@ -40,25 +40,30 @@ const CreateBasketPart = observer(({show, onHide}) => {
             <Modal.Body>
                 <Form.Control 
                     value={fullname}
+                    className='mt-2 mx-1'
                     onChange={e => setFullname(e.target.value)}
                     placeholder={'ФИО заказчика'}></Form.Control>
                 <Form.Control 
                     value={phoneNumber}
-                    onChange={e => setValue(e.target.value)}
+                    className='mt-2 mx-1'
+                    onChange={e => setPhoneNumber(e.target.value)}
                     placeholder={'Номер телефона'}></Form.Control>
                 <Form.Control 
                     value={address}
+                    className='mt-2 mx-1'
                     onChange={e => setAddress(e.target.value)}
                     placeholder={'Адрес'}></Form.Control>
                 <Form.Control 
+                    className='mt-2 mx-1'
                     placeholder={'Номер карты'}></Form.Control>
                 <Form.Control 
+                    className='mt-2 mx-1'
                     placeholder={'CVV'}></Form.Control>
             </Modal.Body>
             <Modal.Footer>
                 <div>К оплате: 25000 руб.</div>
                 <Button variant={'outline-dark'} onClick={onHide}>Закрыть</Button>
-                <Button variant={'outline-dark'} onClick={addType}>Добавить</Button>
+                <Button variant={'outline-dark'} >Добавить</Button>
             </Modal.Footer>
         </Modal>
     );
