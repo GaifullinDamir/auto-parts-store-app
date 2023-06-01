@@ -14,7 +14,7 @@ const BrandBar = observer(() => {
                         style={{cursor:'pointer'}}
                         onClick={() => part.setSelectedBrand(brand)}
                         border={brand.id === part.selectedBrand.id ? 'primary' : 'light'}
-                        key={brand.id}
+                        key={brand._id}
                         className='mx-1 pd-3 w-auto'
                     >
                         {brand.name}

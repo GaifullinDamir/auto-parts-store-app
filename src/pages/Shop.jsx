@@ -17,6 +17,7 @@ const Shop = observer(() => {
         fetchParts(null, null, 1, 3).then(data => {
             part.setParts(data.rows);
             part.setTotalCount(data.count);
+            // console.log(data);
         });
     }, []);
 
@@ -25,7 +26,7 @@ const Shop = observer(() => {
             part.setParts(data.rows);
             part.setTotalCount(data.count, part.selectedType, part.selectedBrand);
         });
-    }, [part.page, ])
+    }, [part.page])
 
     return (
         <Container>

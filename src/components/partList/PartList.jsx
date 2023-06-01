@@ -6,14 +6,16 @@ import PartItem from '../partItem/PartItem';
 
 const PartList = observer(() => {
     const {part} = useContext(Context);
-    
+    // console.dir(part.parts);
     return (
         <Row className='d-flex'>
-           {part.parts.map(part => {
+           {part.parts? part.parts.map(part => {
             return(
-                <PartItem key={part.id} part={part}/>
+                <PartItem key={part._id} part={part}/>
             )
-           })} 
+           })
+        :
+        null} 
         </Row>
     );
 });
