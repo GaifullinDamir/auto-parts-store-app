@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import CreateBrand from '../components/modals/CreateBrand';

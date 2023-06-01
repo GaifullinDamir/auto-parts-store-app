@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Button, Col, Container, Dropdown, Form, Row } from 'react-bootstrap';
 import { Context } from '../..';
@@ -11,6 +11,8 @@ const CreatePart = observer(({show, onHide}) => {
     const [price, setPrice] = useState(0);
     const [file, setFile] = useState(null); 
     const [info, setInfo] = useState([]);
+
+    useEffect(() => {}, [part]);
 
     const addInfo = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}]);

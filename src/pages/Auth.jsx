@@ -36,10 +36,14 @@ const Auth = observer (() => {
             user.setUser(user);
             user.setIsAuth(true);
             user.setIsAdmin(checkAdminRole());
-            await fetchBasket(user.id).then(bsk => {
-                console.log(bsk);
-                basket.setId(bsk._id);
-            });
+
+            if(!user.isAdmin) {
+                await fetchBasket(user.id).then(bsk => {
+                    console.log(bsk);
+                    basket.setId(bsk._id);
+                });
+            }
+            
 
             // console.log(user);
             navigate(SHOP_ROUTE);

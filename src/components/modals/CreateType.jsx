@@ -20,6 +20,7 @@ const CreateType = observer(({show, onHide}) => {
         createType({name: value})
             .then(data => {
                 setValue('');
+                fetchTypes().then(data => part.setTypes(data));
                 onHide();
             })
     };
