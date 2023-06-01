@@ -7,7 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import {Button} from 'react-bootstrap';
 
 import { NavLink, useNavigate } from 'react-router-dom';
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE, BASKET_ROUTE } from '../utils/consts';
 
 import {observer} from 'mobx-react-lite';
 
@@ -35,7 +35,12 @@ const StoreNavbar = observer(() => {
                                 Админ панель
                         </Button>
                     :
-                        null
+                        <Button 
+                            variant='outline-light' 
+                            onClick={() => navigate(BASKET_ROUTE)}
+                            >
+                                Корзина
+                        </Button>
                     }
                     
                     <Button 
