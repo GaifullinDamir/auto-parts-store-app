@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Card, Image, Button, Container } from 'react-bootstrap';
 
-const BasketItem = ({bpart, setIsCreateBasketPartVisible, setClickedPartId}) => {
+const BasketItem = ({bpart, setIsCreateBasketPartVisible, setClickedPartId, orderIsPaid}) => {
     return (
         <Col className='mt-5 d-flex justify-content-center' md={3} onClick={() => setClickedPartId(bpart._id)}>
             <Card 
@@ -11,23 +11,32 @@ const BasketItem = ({bpart, setIsCreateBasketPartVisible, setClickedPartId}) => 
                 <div className='mt-2 d-flex justify-content-between align-items-center'>
                     <div style={{color:'#aaaaaa'}}>{bpart.part.name}</div>
                 </div>
-                <div>{bpart.part.price}</div>
+                <div><span style={{fontSize: '20px', fontWeight: '400'}}>{bpart.part.price} руб.</span></div>
 
-                <Button 
-                    className='mt-1'
-                    variant='outline-dark' 
-                    style ={{width:'50%'}}
-                    onClick={() => setIsCreateBasketPartVisible(true)}
-                    >
-                        Оплатить
-                </Button>
-                <Button 
-                    className='mt-2'
-                    variant='outline-dark' 
-                    style ={{width:'50%'}}
-                    >
-                        Отказаться
-                </Button>
+                {
+                    !orderIsPaid ?
+                    <>
+                    <Button 
+                        className='mt-1'
+                        variant='outline-dark' 
+                        style ={{width:'50%'}}
+                        onClick={() => setIsCreateBasketPartVisible(true)}
+                        >
+                            Оплатить
+                    </Button>
+                    <Button 
+                        className='mt-2'
+                        variant='outline-dark' 
+                        style ={{width:'50%'}}
+                        >
+                            Отказаться
+                    </Button>
+                    </>
+                    :
+
+                    null
+                }
+
             </Card>
         </Col>
         

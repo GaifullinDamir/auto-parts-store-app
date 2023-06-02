@@ -55,18 +55,50 @@ const Basket = observer(() => {
     }, [parts]);
 
     return (
+        <>
         <Row className='d-flex mb-5'>
+            <div style={{textAlign:'center'}}><span style={{fontSize:'35px', fontWeight:'500'}}>Ожидают оплаты</span></div>
+            <hr/>
             {parts.map(bpart => {
                 if(!bpart.orderIsPaid){
                     return(
-                        <BasketItem key={part._id} bpart={bpart} setClickedPartId={setClickedPartId} setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
+                        <BasketItem 
+                            key={part._id} 
+                            bpart={bpart} 
+                            orderIsPaid={false}
+                            setClickedPartId={setClickedPartId} 
+                            setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
                     )
                 }
                 return null;
                     
             })}
-            <CreateBasketPart show={isCreateBasketPartVisible} clickedPartId={clickedPartId} onHide={() => setIsCreateBasketPartVisible(false)}/>
+            <hr/>
         </Row>
+        <Row className='d-flex mb-5'>
+            <div  style={{textAlign:'center'}}><span style={{fontSize:'35px', fontWeight:'500'}}>Оплачены</span></div>
+            <hr/>
+            {parts.map(bpart => {
+                if(bpart.orderIsPaid){
+                    return(
+                        <BasketItem 
+                            key={part._id} 
+                            bpart={bpart} 
+                            orderIsPaid={true}
+                            setClickedPartId={setClickedPartId} 
+                            setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
+                    )
+                }
+                return null;
+                    
+            })}
+            <hr/>
+        </Row>
+        <CreateBasketPart 
+                show={isCreateBasketPartVisible} 
+                clickedPartId={clickedPartId} 
+                onHide={() => setIsCreateBasketPartVisible(false)}/>
+        </>
     );
 });
 
