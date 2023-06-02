@@ -20,12 +20,22 @@ export const fetchOneBasketPart = async (id) => {
     return data;
 }
 
-export const fetchBasketParts = async (basketId) => {
+export const fetchConcreteBasketParts = async (basketId) => {
     const { data } = await $authHost.get(`api/basket-part/${basketId}`);
+    return data;
+}
+
+export const fetchBasketParts = async () => {
+    const { data } = await $authHost.get(`api/basket-part`);
     return data;
 }
 
 export const updateBasketPart = async (id, basketPart) => {
     const { data } = await $authHost.patch(`api/basket-part/${id}`, basketPart)
     return data; 
+}
+
+export const deleteBasketPart = async (id) => {
+    const { data } = await $authHost.delete(`/api/basket-part/${id}`);
+    return data
 }

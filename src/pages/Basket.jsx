@@ -5,13 +5,11 @@ import { Context } from '..';
 import jwt_decode from 'jwt-decode';
 import { fetchBasketParts, fetchBasket } from '../http/basketAPI';
 import { check } from '../http/userAPI';
-import bmw from '../assets/bmw.jpg';
 import CreateBasketPart from '../components/modals/CreateBasketPart';
 import BasketItem from '../components/BasketItem';
 
 const Basket = observer(() => {
-    const {basket, part, user} = useContext(Context);
-    // const [basketId, setBasketId] = useState('');
+    const {basket, part} = useContext(Context);
     const [clickedPartId, setClickedPartId] = useState('');
     const [parts, setParts] = useState([]);
     const [isCreateBasketPartVisible, setIsCreateBasketPartVisible] = useState(false);
@@ -63,7 +61,7 @@ const Basket = observer(() => {
                 if(!bpart.orderIsPaid){
                     return(
                         <BasketItem 
-                            key={part._id} 
+                            key={bpart._id} 
                             bpart={bpart} 
                             orderIsPaid={false}
                             setClickedPartId={setClickedPartId} 
@@ -82,7 +80,7 @@ const Basket = observer(() => {
                 if(bpart.orderIsPaid){
                     return(
                         <BasketItem 
-                            key={part._id} 
+                            key={bpart._id} 
                             bpart={bpart} 
                             orderIsPaid={true}
                             setClickedPartId={setClickedPartId} 
