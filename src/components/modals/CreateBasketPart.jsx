@@ -12,7 +12,6 @@ const CreateBasketPart = observer(({show, onHide, clickedPartId}) => {
     const changeBasketPart = async() => {
         await fetchOneBasketPart(clickedPartId).
             then(data => {
-                setBpart(data);
                 const obj = {
                     fullname,
                     phoneNumber,
