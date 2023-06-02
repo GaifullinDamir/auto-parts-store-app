@@ -11,7 +11,7 @@ import BasketItem from '../components/BasketItem';
 
 const Basket = observer(() => {
     const {basket, part, user} = useContext(Context);
-    const [basketId, setBasketId] = useState('');
+    // const [basketId, setBasketId] = useState('');
     const [clickedPartId, setClickedPartId] = useState('');
     const [parts, setParts] = useState([]);
     const [isCreateBasketPartVisible, setIsCreateBasketPartVisible] = useState(false);
@@ -35,13 +35,36 @@ const Basket = observer(() => {
         }
     }, []);
 
+    useEffect(() => {
+        try{
+            check().then(data => {
+                const uid = jwt_decode(data)._id;
+                fetchBasket(uid).then(bsk => {
+                    basket.setId(bsk._id);
+                }).then(() => {
+                    fetchBasketParts(basket.id).then(data => {
+                        setParts(data);
+                        basket.setBasketParts(data);
+                    });
+            });
+            });
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }, [parts]);
+
     return (
         <Row className='d-flex mb-5'>
             {parts.map(bpart => {
+                if(!bpart.orderIsPaid){
                     return(
                         <BasketItem key={part._id} bpart={bpart} setClickedPartId={setClickedPartId} setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
                     )
-                })}
+                }
+                return null;
+                    
+            })}
             <CreateBasketPart show={isCreateBasketPartVisible} clickedPartId={clickedPartId} onHide={() => setIsCreateBasketPartVisible(false)}/>
         </Row>
     );
