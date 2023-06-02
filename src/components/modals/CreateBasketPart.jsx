@@ -1,10 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Button, Form } from 'react-bootstrap';
-import { createType } from '../../http/partAPI';
-import { fetchBrands, fetchTypes } from '../../http/partAPI';
 import { observer } from 'mobx-react-lite';
-import { Context } from '../..';
 import { updateBasketPart, fetchOneBasketPart } from '../../http/basketAPI';
 
 const CreateBasketPart = observer(({show, onHide, clickedPartId}) => {
@@ -12,17 +9,10 @@ const CreateBasketPart = observer(({show, onHide, clickedPartId}) => {
     const [phoneNumber, setPhoneNumber] = useState(''); 
     const [address, setAddress] = useState(''); 
 
-
-    const {part, basket} = useContext(Context);
-    
-    useEffect(() => {
-    }, []);
-
     const changeBasketPart = async() => {
         await fetchOneBasketPart(clickedPartId).
             then(data => {
-                console.log(clickedPartId)
-                console.log(data)
+                setBpart(data);
                 const obj = {
                     fullname,
                     phoneNumber,
@@ -76,7 +66,6 @@ const CreateBasketPart = observer(({show, onHide, clickedPartId}) => {
                     placeholder={'CVV'}></Form.Control>
             </Modal.Body>
             <Modal.Footer>
-                <div>К оплате: 25000 руб.</div>
                 <Button variant={'outline-dark'} onClick={onHide}>Закрыть</Button>
                 <Button variant={'outline-dark'} onClick={changeBasketPart} >Добавить</Button>
             </Modal.Footer>
