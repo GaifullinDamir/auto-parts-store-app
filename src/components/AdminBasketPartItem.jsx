@@ -4,14 +4,14 @@ import { Row, Col, Card, Image, Button, Container } from 'react-bootstrap';
 const AdminBasketPartItem = ({bpart, deleteBpart}) => {
 
     return (
-        <Col className='mt-5 d-flex justify-content-center' md={3}>
+        <Col className='mt-5 mx-3 mb-2 d-flex justify-content-center' md={3}>
             <Card 
                 className='d-flex flex-column align-items-center'
                 style={{width: 250, cursor:'pointer'}} border={'light'}>
                 <Image style={{margin: '0 auto', 'objectFit': 'contain'}} width={250} height={300} src={process.env.REACT_APP_API_URL + bpart.part.imgUrl}/>
-                <div><span style={{fontSize: '20px', fontWeight: '200'}}>{bpart.fullname} руб.</span></div>
-                <div><span style={{fontSize: '20px', fontWeight: '200'}}>{bpart.address} руб.</span></div>
-                <div><span style={{fontSize: '20px', fontWeight: '200'}}>{bpart.phoneNumber} руб.</span></div>
+                <div><span style={{fontSize: '20px', fontWeight: '200'}}>{bpart.fullname}</span></div>
+                <div><span style={{fontSize: '20px', fontWeight: '200'}}>{bpart.address}</span></div>
+                <div><span style={{fontSize: '20px', fontWeight: '200'}}>{bpart.phoneNumber}</span></div>
                 <div className='mt-2 d-flex justify-content-between align-items-center'>
                     <div style={{color:'#aaaaaa'}}>{bpart.part.name}</div>
                 </div>

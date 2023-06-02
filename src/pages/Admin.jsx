@@ -15,8 +15,10 @@ const Admin = () => {
 
     const deleteBpart = async (clickedPartId) => {
         try{
+            console.log(clickedPartId)
             await deleteBasketPart(clickedPartId).then(data => {
-                if(data.success){
+                if(data.success === true){
+                    console.log(data)
                     alert('Заказ обработан');
                 }
             })
@@ -48,9 +50,9 @@ const Admin = () => {
     
 
     return (
-        <Container style={{minWidth:'100%'}} className='d-flex justify-content-between w-100'>
+        <Container style={{minWidth:'100%'}}>
             <Row>
-                <Col md={3} style={{borderRight: '1px solid grey'}} className='d-flex flex-column align-items-center w-20'>
+                <Col md={3} style={{ minWidth:'25%', minHeight: '100vh' }} className='h-100 d-flex flex-column align-items-center w-20'>
                     <Button 
                         variant={'outline-dark'} 
                         className='mt-4 p-2 w-50'
@@ -76,8 +78,8 @@ const Admin = () => {
                     <CreateBrand show={isBrandVisible} onHide={() => setIsBrandVisible(false)}/>
                     <CreatePart show={isPartVisible} onHide={() => setIsPartVisible(false)}/>
                 </Col>
-                <Col md={9}>
-                    <Row className='d-flex mb-5'>
+                <Col md={9} style={{minHeight: '100vh'}}>
+                    <Row className='d-flex mb-5 w-100'>
                         <div style={{textAlign:'center'}}><span style={{fontSize:'35px', fontWeight:'500'}}>Оплачены</span></div>
                         <hr/>
                         {bparts.map(bpart => {
