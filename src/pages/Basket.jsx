@@ -50,7 +50,7 @@ const Basket = observer(() => {
         } catch (error) {
             console.log(error);
         }
-    }, [parts]);
+    }, [clickedPartId]);
 
     const deleteBPart = async (clickedPartId) => {
         try{

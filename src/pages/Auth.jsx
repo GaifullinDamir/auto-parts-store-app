@@ -25,28 +25,22 @@ const Auth = observer (() => {
                 user.setId(data._id);
             } else {
                 data = await registration(email, password);
-                console.log('basket');
-                    if(!basket.basket) {
-                        await createBasket().then(basketData => {
-                            basket.setBasket(basketData);
-                        });
-                        // console.log(basket);
-                    }
+                user.setId(data._id);
+                await createBasket().then(basketData => {
+                    basket.setId(basketData._id);
+                });
             }
             user.setUser(user);
             user.setIsAuth(true);
             user.setIsAdmin(checkAdminRole());
 
+            console.log(user)
             if(!user.isAdmin) {
                 await fetchBasket(user.id).then(bsk => {
-                    console.log(bsk);
                     basket.setId(bsk._id);
-                    // localStorage.setItem('basketId', data.token);
                 });
             }
             
-
-            // console.log(user);
             navigate(SHOP_ROUTE);
         }catch(e){
             alert(e);

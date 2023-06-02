@@ -16,12 +16,11 @@ const StoreNavbar = observer(() => {
     const navigate = useNavigate();
 
     const logOut = () => {
-        console.log('Выход');
         user.setUser({});
         user.setIsAuth(false);
         basket.setId(null);
         localStorage.clear();
-        navigate(SHOP_ROUTE);
+        navigate(LOGIN_ROUTE);
     }
 
     return (

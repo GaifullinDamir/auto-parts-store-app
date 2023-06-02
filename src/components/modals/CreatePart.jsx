@@ -8,7 +8,7 @@ import { createPart, uploadFile } from '../../http/partAPI';
 const CreatePart = observer(({show, onHide}) => {
     const {part} = useContext(Context);
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState();
     const [file, setFile] = useState(null); 
     const [info, setInfo] = useState([]);
 

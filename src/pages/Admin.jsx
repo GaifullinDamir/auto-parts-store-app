@@ -24,7 +24,6 @@ const Admin = () => {
         } catch(error) {
             console.log(error);
         }
-        
     }
 
     useEffect(() => {

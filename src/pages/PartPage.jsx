@@ -2,12 +2,14 @@ import React, {useEffect, useState, useContext} from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { fetchOnePart, fetchOnePartInfo } from '../http/partAPI';
+
 import bigStar from '../assets/star.png';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { createBasketPart } from '../http/basketAPI';
 import MessageModal from '../components/modals/MessageModal';
 import { checkAdminRole } from '../http/userAPI';
+
 
 const PartPage = observer(() => {
     const {basket, user} = useContext(Context);
@@ -35,9 +37,11 @@ const PartPage = observer(() => {
                 phoneNumber: '',
                 address: '',
                 orderIsPaid: false,
-                basketId: basket.id,
+                basketId: basket._id,
                 partId: id
             };
+
+            console.log(basketPart);
     
             const result = await createBasketPart(basketPart).then(data => {
                 basket.setBasketParts([...basket.basketParts, data]);
