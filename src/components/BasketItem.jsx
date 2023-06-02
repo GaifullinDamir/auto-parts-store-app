@@ -1,7 +1,8 @@
 import React from 'react';
 import { Row, Col, Card, Image, Button, Container } from 'react-bootstrap';
 
-const BasketItem = ({bpart, setIsCreateBasketPartVisible, setClickedPartId, orderIsPaid}) => {
+const BasketItem = ({bpart, setIsCreateBasketPartVisible, deleteBPart, setClickedPartId, orderIsPaid}) => {
+
     return (
         <Col className='mt-5 d-flex justify-content-center' md={3} onClick={() => setClickedPartId(bpart._id)}>
             <Card 
@@ -28,6 +29,7 @@ const BasketItem = ({bpart, setIsCreateBasketPartVisible, setClickedPartId, orde
                         className='mt-2'
                         variant='outline-dark' 
                         style ={{width:'50%'}}
+                        onClick={() => deleteBPart(bpart._id)}
                         >
                             Отказаться
                     </Button>

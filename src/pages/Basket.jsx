@@ -3,7 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import jwt_decode from 'jwt-decode';
-import { fetchBasketParts, fetchBasket } from '../http/basketAPI';
+import { fetchBasketParts, fetchBasket, deleteBasketPart } from '../http/basketAPI';
 import { check } from '../http/userAPI';
 import CreateBasketPart from '../components/modals/CreateBasketPart';
 import BasketItem from '../components/BasketItem';
@@ -52,6 +52,18 @@ const Basket = observer(() => {
         }
     }, [parts]);
 
+    const deleteBPart = async (clickedPartId) => {
+        try{
+            await deleteBasketPart(clickedPartId).then(data => {
+                if(data.success === true){
+                    alert('Заказ отменен.');
+                }
+            })
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
         <Row className='d-flex mb-5'>
@@ -64,6 +76,7 @@ const Basket = observer(() => {
                             key={bpart._id} 
                             bpart={bpart} 
                             orderIsPaid={false}
+                            deleteBPart={deleteBPart}
                             setClickedPartId={setClickedPartId} 
                             setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
                     )
@@ -71,11 +84,9 @@ const Basket = observer(() => {
                 return null;
                     
             })}
-            <hr/>
         </Row>
         <Row className='d-flex mb-5'>
             <div  style={{textAlign:'center'}}><span style={{fontSize:'35px', fontWeight:'500'}}>Оплачены</span></div>
-            <hr/>
             {parts.map(bpart => {
                 if(bpart.orderIsPaid){
                     return(
@@ -84,13 +95,13 @@ const Basket = observer(() => {
                             bpart={bpart} 
                             orderIsPaid={true}
                             setClickedPartId={setClickedPartId} 
+                            
                             setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
                     )
                 }
                 return null;
                     
             })}
-            <hr/>
         </Row>
         <CreateBasketPart 
                 show={isCreateBasketPartVisible} 

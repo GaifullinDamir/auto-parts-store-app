@@ -15,7 +15,6 @@ const Admin = () => {
 
     const deleteBpart = async (clickedPartId) => {
         try{
-            console.log(clickedPartId)
             await deleteBasketPart(clickedPartId).then(data => {
                 if(data.success === true){
                     console.log(data)
@@ -80,8 +79,7 @@ const Admin = () => {
                 </Col>
                 <Col md={9} style={{minHeight: '100vh'}}>
                     <Row className='d-flex mb-5 w-100'>
-                        <div style={{textAlign:'center'}}><span style={{fontSize:'35px', fontWeight:'500'}}>Оплачены</span></div>
-                        <hr/>
+                        <div style={{textAlign:'center'}}><span style={{fontSize:'35px', fontWeight:'500'}}>Оплаченные товары</span></div>
                         {bparts.map(bpart => {
                             if(bpart.orderIsPaid){
                                 return(

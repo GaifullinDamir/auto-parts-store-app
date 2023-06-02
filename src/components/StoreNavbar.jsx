@@ -27,7 +27,7 @@ const StoreNavbar = observer(() => {
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
-            <NavLink to={SHOP_ROUTE} style={{color:'#ffffff', textDecoration:'none'}}>Bayerisch</NavLink>
+            <NavLink to={SHOP_ROUTE} style={{color:'#ffffff', textDecoration:'none', fontSize:'30px'}}>Bayerisch</NavLink>
             {user.isAuth ?
                 <Nav className="ml-auto">
                     {user.isAdmin ?
