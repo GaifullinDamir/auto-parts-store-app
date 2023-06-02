@@ -12,6 +12,7 @@ import BasketItem from '../components/BasketItem';
 const Basket = observer(() => {
     const {basket, part, user} = useContext(Context);
     const [basketId, setBasketId] = useState('');
+    const [clickedPartId, setClickedPartId] = useState('');
     const [parts, setParts] = useState([]);
     const [isCreateBasketPartVisible, setIsCreateBasketPartVisible] = useState(false);
     
@@ -36,12 +37,12 @@ const Basket = observer(() => {
 
     return (
         <Row className='d-flex mb-5'>
-            {parts.map(part => {
+            {parts.map(bpart => {
                     return(
-                        <BasketItem key={part._id} part={part.part} setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
+                        <BasketItem key={part._id} bpart={bpart} setClickedPartId={setClickedPartId} setIsCreateBasketPartVisible={setIsCreateBasketPartVisible}/>
                     )
                 })}
-            <CreateBasketPart show={isCreateBasketPartVisible} onHide={() => setIsCreateBasketPartVisible(false)}/>
+            <CreateBasketPart show={isCreateBasketPartVisible} clickedPartId={clickedPartId} onHide={() => setIsCreateBasketPartVisible(false)}/>
         </Row>
     );
 });

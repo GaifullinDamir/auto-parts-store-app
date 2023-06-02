@@ -5,8 +5,9 @@ import { createType } from '../../http/partAPI';
 import { fetchBrands, fetchTypes } from '../../http/partAPI';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../..';
+import { updateBasketPart, fetchOneBasketPart } from '../../http/basketAPI';
 
-const CreateBasketPart = observer(({show, onHide}) => {
+const CreateBasketPart = observer(({show, onHide, clickedPartId}) => {
     const [fullname, setFullname] = useState(''); 
     const [phoneNumber, setPhoneNumber] = useState(''); 
     const [address, setAddress] = useState(''); 
@@ -17,12 +18,26 @@ const CreateBasketPart = observer(({show, onHide}) => {
     useEffect(() => {
     }, []);
 
-    const addBasketPart = () => {
-        // createType({name: value})
-        //     .then(data => {
-        //         setValue('');
-        //         onHide();
-        //     })
+    const changeBasketPart = async() => {
+        await fetchOneBasketPart(clickedPartId).
+            then(data => {
+                console.log(clickedPartId)
+                console.log(data)
+                const obj = {
+                    fullname,
+                    phoneNumber,
+                    address,
+                    orderIsPaid: true,
+                    basket: data.basket,
+                    part: data.part,
+                }
+                console.log(obj);
+                updateBasketPart(data._id, obj)
+                    .then(data => {
+                        onHide();
+                    })
+            })
+        
     };
 
     return (
@@ -63,7 +78,7 @@ const CreateBasketPart = observer(({show, onHide}) => {
             <Modal.Footer>
                 <div>К оплате: 25000 руб.</div>
                 <Button variant={'outline-dark'} onClick={onHide}>Закрыть</Button>
-                <Button variant={'outline-dark'} >Добавить</Button>
+                <Button variant={'outline-dark'} onClick={changeBasketPart} >Добавить</Button>
             </Modal.Footer>
         </Modal>
     );

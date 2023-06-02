@@ -16,7 +16,7 @@ export const createBasketPart = async (basketPart) => {
 }
 
 export const fetchOneBasketPart = async (id) => {
-    const { data } = await $host.get(`api/basket-part/${id}`);
+    const { data } = await $authHost.get(`api/one-basket-part/${id}`);
     return data;
 }
 
