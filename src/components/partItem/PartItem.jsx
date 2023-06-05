@@ -13,7 +13,7 @@ const PartItem = ({part}) => {
             <Card style={{width: 150, cursor:'pointer'}} border={'light'}>
                 <Image style={{ 'objectFit': 'contain'}} width={200} height={250} src={process.env.REACT_APP_API_URL + part.imgUrl}/>
                 <div className='mt-2 d-flex justify-content-between align-items-center'>
-                    <div style={{color:'#aaaaaa'}}>Michelin...</div>
+                    <div style={{color:'#aaaaaa'}}>{part.name}</div>
                     
                 </div>
                 <div>{part.name}</div>
